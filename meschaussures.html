@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accueil</title>
+  <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
+
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="stylee.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+  <style>
+    .side-menu { display: none; }
+    .side-menu.active { display: block; }
+    #panier-content {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #ccc;
+      right: 10px;
+      top: 60px;
+      width: 300px;
+      z-index: 1000;
+      padding: 10px;
+    }
+    .panier { cursor: pointer; position: relative; }
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+
+    .close-panier {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+  </style>
+   
+</head>
+<body>
+  <div id="message-suppression" style="display: none; padding: 10px; background: #dff0d8; color: #3c763d; margin: 10px; border-radius: 5px;"></div>
+
+  <!-- Réseaux sociaux -->
+  <div class="menu">
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+    <div class="me">
+      <p class="titre"><span class="icone">📧</span> E-mail : awasall@gmail.com</p>
+      <p class="titre"><span class="icone"> 📞</span> Contact : +33 7 59 29 91 79
+  </div>
+  </div>
+
+  <!-- Logo et Panier -->
+  <div class="menu1">
+    <img src="images/logo.PNG" alt="Logo">
+    <div class="panier" id="panier-icon">
+      <i class="fa fa-shopping-cart"></i>
+      <span class="cart-count">0</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Panier déroulant -->
+  <div id="panier-content" style="display: none;">
+    <div class="close-panier" id="close-panier-btn"><i class="fa fa-times"></i></div>
+    <ul id="cart-items"></ul>
+    <p>Total : <span id="cart-total">0.00€</span></p>
+    <a href="commande.html" class="commander-btn">Commander</a>
+  </div>
+
+  <!-- Menu Hamburger -->
+  <header>
+    <div class="container">
+    <nav class="navbar section-content">
+        <a href="#" class="nav-logo">
+            <h2 class="logo-text">Khadija Kids</h2>
+        </a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+            <li class="nav-item">
+                <a href="accuiel.html" class="nav-link">Accuieil</a>
+            </li>
+            <li class="nav-item">
+                <a href="chausure.html" class="nav-link">Chaussures Enfants</a>
+            </li>
+            
+            <li class="nav-item">
+              <a href="boucle.html" class="nav-link">Chaussures</a>
+          </li>
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+
+    </nav>
+</div>
+</header>
+  
+
+  
+
+  <!-- Nos Collections -->
+  <section class="categories">
+    <h2>Nos Collections</h2>
+    <div class="premierpartie">
+      <div class="row">
+        <div class="col-3">
+          <img src="imagepetit/a.jpg">
+          <div class="texte"><a href="chausure.html">Découvrir nos Chaussures d'enfant</a></div>
+        </div>
+        <div class="col-3">
+          <img src="imagegrand/a.jpg">
+          <div class="texte"><a href="habit.html">Découvrir nos Chaussures pour adultes</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleBtn = document.getElementById("menu-toggle");
+      const sideMenu = document.getElementById("side-menu");
+      const closeBtn = document.getElementById("close-btn");
+  
+      toggleBtn?.addEventListener("click", function (event) {
+        event.stopPropagation();
+        sideMenu?.classList.toggle("active");
+      });
+  
+      closeBtn?.addEventListener("click", function (event) {
+        event.stopPropagation();
+        sideMenu?.classList.remove("active");
+      });
+  
+      // Ne pas fermer si on clique à l'intérieur du menu
+      sideMenu?.addEventListener("click", function (event) {
+        event.stopPropagation();
+      });
+  
+      // Fermer si on clique en dehors du menu
+      document.addEventListener("click", function (event) {
+        const isClickInside = sideMenu?.contains(event.target);
+        const isClickOnToggle = toggleBtn?.contains(event.target);
+  
+        if (!isClickInside && !isClickOnToggle) {
+          sideMenu?.classList.remove("active");
+        }
+      });
+  
+      // === Slider automatique ===
+      let slides = document.querySelectorAll(".slide");
+      let index = 0;
+  
+      if (slides.length > 0) {
+        slides[0].classList.add("active"); // Afficher la première slide
+  
+        function showNextSlide() {
+          slides[index].classList.remove("active");
+          index = (index + 1) % slides.length;
+          slides[index].classList.add("active");
+        }
+  
+        setInterval(showNextSlide, 4000);
+      }
+  
+      // === Panier ===
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cartIcon = document.getElementById("panier-icon");
+const cartContent = document.getElementById("panier-content");
+const cartItems = document.getElementById("cart-items");
+const cartTotal = document.getElementById("cart-total");
+const cartCount = document.querySelector(".cart-count");
+
+// Afficher/masquer le panier
+cartIcon?.addEventListener("click", () => {
+  cartContent.style.display = cartContent.style.display === "block" ? "none" : "block";
+});
+
+// Fermer le panier en cliquant sur la croix
+const closePanierBtn = document.getElementById("close-panier-btn");
+closePanierBtn?.addEventListener("click", () => {
+  cartContent.style.display = "none";
+});
+
+// Fermer le panier si un clic est effectué en dehors
+document.addEventListener("click", function (e) {
+  if (!cartContent.contains(e.target) && !cartIcon.contains(e.target)) {
+    cartContent.style.display = "none";
+  }
+});
+
+// Fonction pour mettre à jour l'affichage du panier
+function updateCartDisplay() {
+  cartItems.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.style.listStyle = "none";
+    li.style.padding = "10px";
+    li.style.borderBottom = "1px solid #ddd";
+
+    li.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="${item.img}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+        <div style="flex-grow: 1;">
+          <p style="margin: 0; font-weight: bold;">${item.name}</p>
+          <p style="margin: 0;">${item.price}€</p>
+        </div>
+        <button 
+          class="remove-btn" 
+          data-index="${index}"
+          style="
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          Supprimer
+        </button>
+      </div>
+    `;
+    cartItems.appendChild(li);
+    total += item.price;
+  });
+
+  cartTotal.textContent = total.toFixed(2);
+  cartCount.textContent = cart.length;
+
+  // Ajouter l'événement de suppression des articles
+  document.querySelectorAll(".remove-btn").forEach(button => {
+    button.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const index = this.getAttribute("data-index");
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartDisplay();
+    });
+  });
+}
+
+// Vérification régulière des changements dans le panier
+setInterval(() => {
+  let updatedCart = JSON.parse(localStorage.getItem("cart")) || [];
+  if (JSON.stringify(updatedCart) !== JSON.stringify(cart)) {
+    cart = updatedCart;
+    updateCartDisplay();
+  }
+}, 2000);
+
+// Mise à jour initiale de l'affichage du panier
+updateCartDisplay();
+    });
+  </script>
+  <script src="scri.js"></script>
+</body>
+</html>

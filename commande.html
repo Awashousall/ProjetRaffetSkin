@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commande</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    .commande-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .commande-items {
+      margin-bottom: 20px;
+    }
+
+    .commande-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #fafafa;
+      border-radius: 5px;
+    }
+
+    .commande-item img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .commande-item div {
+      flex-grow: 1;
+    }
+
+    .commande-item p {
+      margin: 0;
+    }
+
+    .commande-total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .finaliser-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 18px;
+      margin-top: 15px;
+    }
+
+    .finaliser-btn:hover {
+      background-color: #218838;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffdddd;
+      color: #d32f2f;
+      border-radius: 5px;
+    }
+
+    form label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #e91e63;
+    }
+
+    form input {
+      width: 80%;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #e91e63;
+      background-color: #fff0f5;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    form input:focus {
+      outline: none;
+      border-color: #c2185b;
+      box-shadow: 0 0 5px #f06292;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="commande-container">
+    <h2>Votre Panier</h2>
+    
+    <div id="empty-cart" class="empty-cart" style="display: none;">
+      Votre panier est vide. Ajoutez des produits avant de commander.
+    </div>
+
+    <div id="commande-items" class="commande-items"></div>
+
+    <div class="commande-total">
+      Total : <span id="commande-total">0.00€</span>
+    </div>
+
+    <form id="user-info-form">
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" placeholder="Entrez votre nom" required>
+
+      <label for="prenom">Prénom :</label>
+      <input type="text" id="prenom" placeholder="Entrez votre prénom" required>
+
+      <label for="telephone">Téléphone :</label>
+      <input type="tel" id="telephone" placeholder="Numéro de téléphone" required>
+
+      <label for="pays">Pays :</label>
+      <input type="text" id="pays" placeholder="Pays de résidence" required>
+
+      <label for="email">Email (facultatif) :</label>
+      <input type="email" id="email" placeholder="Votre adresse email">
+    </form>
+
+    <a href="#" id="finaliser-btn" class="finaliser-btn" style="display: none;">Finaliser la commande</a>
+    <a href="#" id="whatsapp-btn" class="finaliser-btn" style="display: none;">Envoyer sur WhatsApp</a>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const commandeItems = document.getElementById("commande-items");
+    const commandeTotal = document.getElementById("commande-total");
+    const finaliserBtn = document.getElementById("finaliser-btn");
+    const whatsappBtn = document.getElementById("whatsapp-btn");
+    const emptyCart = document.getElementById("empty-cart");
+
+    function updateCommandeDisplay() {
+      commandeItems.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        emptyCart.style.display = "block";
+        finaliserBtn.style.display = "none";
+        whatsappBtn.style.display = "none";
+      } else {
+        emptyCart.style.display = "none";
+        finaliserBtn.style.display = "block";
+        whatsappBtn.style.display = "block";
+
+        cart.forEach((item) => {
+          const div = document.createElement("div");
+          div.classList.add("commande-item");
+          div.innerHTML = `
+            <img src="${item.img}" alt="${item.name}">
+            <div>
+              <p>${item.name}</p>
+              <p>${item.price}€</p>
+            </div>
+          `;
+          commandeItems.appendChild(div);
+          total += item.price;
+        });
+      }
+
+      commandeTotal.textContent = total.toFixed(2) + "€";
+    }
+
+    function clearCart() {
+      cart = [];
+      localStorage.removeItem("cart");
+      updateCommandeDisplay();
+    }
+
+    function sendWhatsAppMessage() {
+      const nom = document.getElementById("nom").value.trim();
+      const prenom = document.getElementById("prenom").value.trim();
+      const telephone = document.getElementById("telephone").value.trim();
+      const pays = document.getElementById("pays").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (!nom || !prenom || !telephone || !pays) {
+        alert("Veuillez remplir tous les champs obligatoires.");
+        return;
+      }
+
+      let message = `Commande de :\nNom : ${nom}\nPrénom : ${prenom}\nTéléphone : ${telephone}\nPays : ${pays}`;
+      if (email) {
+        message += `\nEmail : ${email}`;
+      }
+
+      message += `\n\nProduits :\n`;
+
+      cart.forEach((item) => {
+        message += `${item.name} - ${item.price}€\n`;
+      });
+
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      message += `\nTotal : ${total.toFixed(2)}€`;
+
+      let encodedMessage = encodeURIComponent(message);
+      let whatsappLink = `https://wa.me/221775785569?text=${encodedMessage}`;
+      window.open(whatsappLink, '_blank');
+
+      clearCart();
+    }
+
+    updateCommandeDisplay();
+
+    finaliserBtn.addEventListener("click", () => {
+  // Vérifie si le panier est vide
+  if (cart.length === 0) {
+    alert("Votre panier est vide, ajoutez des produits avant de finaliser la commande.");
+    return;
+  }
+
+  // Récupérer les informations du formulaire
+  const nom = document.getElementById("nom").value.trim();
+  const prenom = document.getElementById("prenom").value.trim();
+  const telephone = document.getElementById("telephone").value.trim();
+  const pays = document.getElementById("pays").value.trim();
+  const email = document.getElementById("email").value.trim();
+
+  if (!nom || !prenom || !telephone || !pays) {
+    alert("Veuillez remplir tous les champs obligatoires.");
+    return;
+  }
+
+  const commandeData = {
+    nom,
+    prenom,
+    telephone,
+    pays,
+    email,
+    produits: cart,
+    total: cart.reduce((sum, item) => sum + item.price, 0),
+  };
+
+  // Envoi des données de la commande au serveur
+  fetch("enregistrer_commande.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(commandeData),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert("Commande enregistrée avec succès !");
+        clearCart();
+        window.location.href = "merci.html"; // Redirection après confirmation
+      } else {
+        alert("Une erreur est survenue, veuillez réessayer.");
+      }
+    })
+    .catch(error => {
+      console.error("Erreur :", error);
+      alert("Une erreur est survenue, veuillez réessayer.");
+    });
+});
+
+
+    whatsappBtn.addEventListener("click", sendWhatsAppMessage);
+  </script>
+
+</body>
+</html>

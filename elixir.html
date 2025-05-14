@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Habit</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="sr.css"/>
+  <link rel="stylesheet" href="responsive.css"/>
+  <link rel="stylesheet" href="stylee.css"/>
+  <link rel="stylesheet" href="col2.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+  <style>
+
+    .panier {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .cart-count {
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+      padding: 2px 6px;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+
+    #panier-content {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: #fff;
+      position: absolute;
+      top: 100px;
+      right: 20px;
+      width: 250px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    #panier-content .close-btn {
+      font-size: 24px;
+      position: absolute;
+      top: 1px;
+      right: 5px;
+      cursor: pointer;
+    }
+
+    #cart-items li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      justify-content: space-between;
+    }
+
+    #cart-items img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .categories {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .col-3 {
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 200px;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    .col-3 img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .prix {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .add-to-cart {
+      display: inline-block;
+      margin-top: 10px;
+      color: #fff;
+      background-color: #28a745;
+      padding: 8px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+
+    .add-to-cart:hover {
+      background-color: #218838;
+    }
+
+    .remove-btn {
+      background-color: #f44336;
+      color: white;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background-color: #d32f2f;
+    }
+
+  </style>
+</head>
+<body>
+<!-- Message qui s'affiche après l'ajout d'un produit -->
+<div id="message-ajout" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color:#28a745; color:white; padding:10px 20px; border-radius:5px; box-shadow:0 4px 6px rgba(0,0,0,0.1); z-index:1000;">
+    Vous avez ajouté <span id="product-name"></span> au panier !
+  </div>
+  <div id="message-suppression" style="display: none; position:fixed; top:60px; left:50%; transform:translateX(-50%); background: #dff0d8; color: #3c763d; padding: 10px 20px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index:1000;">
+   le produit a été supprimé <span id="product-name"></span> du panier !
+  </div>
+  
+  <div class="livreur">
+    <p class="livraison">LIVRAISON EN MOINS DE 24H À DAKAR</p>
+    
+</div>
+  
+  <!-- Réseaux sociaux -->
+  <div class="menu">
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+     <div class="natou">
+          <ul class="coordonnees">
+            <li>
+              <a href="#" class="nav-item tel-block">
+                <span class="icon-phone">📍</span>
+                <div class="phone-text">
+                  <div class="label">Adresse :</div>
+                  <div class="numbers">Ouakam Coté Monument de la renaissance</div>
+                </div>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="nav-item tel-block">
+                <span class="icon-phone">📞</span>
+                <div class="phone-text">
+                  <div class="label">Téléphone :</div>
+                  <div class="numbers">+221 78 658 53 53 / +221 76 427 49 40 / 33 820 75 19</div>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="nav-item tel-block">
+                <span class="icon-phone">📧</span>
+                <div class="phone-text">
+                  <div class="label">Email :</div>
+                  <div class="numbers">raffetskin@gmail.com</div>
+                </div>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="nav-item tel-block">
+                <span class="icon-phone">🕒</span>
+                <div class="phone-text">
+                  <div class="label"> Horaires :</div>
+                  <div class="numbers">Lun - Sam : 10h - 18h</div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+  </div>
+
+  <!-- Logo et panier -->
+  <div class="menu1">
+    <img src="images/logorafet.jpeg" alt="Logo" class="logo">
+  
+    <div class="row">
+      <div class="search-box">
+        <input type="search" placeholder="Rechercher des produits" />
+        <i class="fa fa-search"></i>
+      </div>
+  
+      <div class="panier" id="panier-icon">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </div>
+    </div>
+  </div>
+  <!-- Panier déroulant -->
+  <div id="panier-content">
+    <span class="close-btn" id="close-panier">×</span>
+    <ul id="cart-items"></ul>
+    <p>Total : <span id="cart-total">0 F</span></p>
+    <a href="commande.html" class="commander-btn">Commander</a>
+  </div>
+  <header>
+    <div class="container">
+    <nav class="navbar section-content">
+        <a href="#" class="nav-logo">
+          <h2 class="logo-text">
+            <span class="raffet">Raffet</span>
+            <span class="skin">Skin</span>
+          </h2>
+          
+        </a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+              <li class="nav-item dropdown">
+                      <span class="nav-link">Nos Gammes <span class="chevron">▾</span></span>
+                      <ul class="dropdown-menu">
+                        <li><a href="elixir.html">🧖 Gammes Elixir</a></li>
+                        <li><a href="#">💆 Gammes Caramel</a></li>
+                         <li><a href="#">💆 Gammes Melanil</a></li>
+                      </ul>
+                    </li>
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a href="chausure.html" class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item mobile-email">
+                      <span class="nav-link">📧 <strong>Email :</strong> raffetskin@gmail.com</span>
+                  </li>
+                  
+                  
+                  <li class="nav-item mobile-email">
+                    <span class="nav-link">📞<strong> Téléphone  :</strong><br> +221 78 658 53 53 / +221 76 427 49 40 / 33 820 75 19</span>
+                </li>
+                <li class="nav-item mobile-info">
+                  <span class="nav-link">⏰ Horaires d'ouverture : Lun - Sam : 10h - 18h</span>
+              </li>
+              <li class="nav-item mobile-info">
+                  <span class="nav-link">📍 Adresse :<br> Ouakam Coté Monument de la renaissance </span>
+              </li>
+                    
+              <li class="nav-item mobile-social-icons">
+                <a href="https://facebook.com/keynaspa" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/keynaspa" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+              </li>
+             
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+
+    </nav>
+</div>
+</header>
+  <div class="elix">
+    <img src="elixir/e1.jpeg" alt="elixir">
+</div>
+
+
+  <!-- Section catégories -->
+   <div class="montitre">
+  <h2>NOOOOOO</h2>
+</div>
+  
+  <div class="grid-produits">
+    <div class="carte-produit">
+      <img src="elixir/e1.jpeg" alt="Produit 1">
+      <p class="prix">5000F</p>
+      <a href="#" class="add-to-cart" data-name="Produit 1" data-price="5000" data-img="elixir/e1.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="imagepetit/im4.jpeg" alt="Produit 2">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 2" data-price="5" data-img="imagepetit/im4.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+     <a href="elixir/e2.jpeg">
+      <img src="elixir/e2.jpeg" alt="Produit 3">
+      </a> 
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 3" data-price="5" data-img="elixir/e2.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="elixir/e3.jpeg" alt="Produit 4">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 4" data-price="5" data-img="elixir/e3.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="elixir/e4.jpeg" alt="Produit 5">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 5" data-price="5" data-img="elixir/e4.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="elixir/e5.jpeg" alt="Produit 6">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 6" data-price="5" data-img="elixir/e5.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="elixir/e5.jpeg" alt="Produit 6">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 6" data-price="5" data-img="elixir/e5.jpeg">Ajouter au panier →</a>
+    </div>
+  </div>
+  
+
+<div id="imageModal" class="modal">
+  <div class="modal-content-wrapper horizontal-layout">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <img id="modalImage" src="" alt="Agrandissement du produit">
+
+    <div class="product-details">
+      <p id="modalPrice" class="prix">5€</p>
+      <a href="#" id="modalAddToCart" class="add-to-cart" 
+         data-name="" data-price="" data-img="">Ajouter au panier →</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+  <!-- Script panier -->
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cartIcon = document.getElementById("panier-icon");
+const cartContent = document.getElementById("panier-content");
+const cartItems = document.getElementById("cart-items");
+const cartTotal = document.getElementById("cart-total");
+const cartCount = document.querySelector(".cart-count");
+const closeBtn = document.getElementById("close-panier");
+
+// Mettre à jour l'affichage du panier
+function updateCartDisplay() {
+  cartItems.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <img src="${item.img}" alt="${item.name}" width="50">
+      <div>
+        <p>${item.name}</p>
+        <p>${item.price}F</p>
+      </div>
+      <button class="remove-btn" data-index="${index}">Supprimer</button>
+    `;
+    cartItems.appendChild(li);
+    total += item.price;
+  });
+
+  cartTotal.textContent = total.toLocaleString() + " F";
+  cartCount.textContent = cart.length;
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Ajouter un produit au panier
+document.querySelectorAll(".add-to-cart").forEach(button => {
+  button.addEventListener("click", function (e) {
+    e.preventDefault();
+    const name = this.dataset.name;
+    const price = parseInt(this.dataset.price);
+    const img = this.dataset.img;
+
+    cart.push({ name, price, img });
+    updateCartDisplay();
+
+    document.getElementById("product-name").textContent = name;
+    document.getElementById("message-ajout").style.display = "block";
+    setTimeout(() => {
+      document.getElementById("message-ajout").style.display = "none";
+    }, 2000);
+  });
+});
+
+// Supprimer un produit
+cartItems.addEventListener("click", function (e) {
+  if (e.target.classList.contains("remove-btn")) {
+    const index = e.target.dataset.index;
+    const removedItem = cart[index].name;
+    cart.splice(index, 1);
+    updateCartDisplay();
+
+    document.getElementById("product-name").textContent = removedItem;
+    document.getElementById("message-suppression").style.display = "block";
+    setTimeout(() => {
+      document.getElementById("message-suppression").style.display = "none";
+    }, 2000);
+  }
+});
+
+// Ouvrir/fermer le panier
+cartIcon.addEventListener("click", (e) => {
+  e.stopPropagation(); // Empêche l'événement de propagation au document
+  cartContent.style.display = cartContent.style.display === "block" ? "none" : "block";
+});
+
+// Fermer le panier
+closeBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+});
+
+// Fermer le panier si on clique à l'extérieur
+document.addEventListener("click", (e) => {
+  if (!cartContent.contains(e.target) && e.target !== cartIcon) {
+    cartContent.style.display = "none";
+  }
+});
+
+// Initialiser
+updateCartDisplay();
+
+  </script>
+  
+<script src="scri.js"></script>
+
+</body>
+</html>

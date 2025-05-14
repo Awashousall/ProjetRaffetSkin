@@ -1,0 +1,598 @@
+/* Responsive */
+@media screen and (max-width: 1024px) {
+    .col-4 {
+      flex: 1 1 calc(50% - 20px);
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .col-4 {
+      flex: 1 1 100%;
+    }
+  
+    .product-img-wrapper {
+      height: 200px;
+    }
+  
+    .product-img-wrapper img {
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  
+  /* Responsiveness pour les écrans plus petits */
+  @media (max-width: 1200px) {
+    .col-4 {
+        flex-basis: 30%; /* Chaque produit occupe environ 30% de la largeur */
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .col-4 {
+        flex-basis: 45%; /* Chaque produit occupe environ 45% de la largeur */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .col-4 {
+        flex-basis: 100%; /* Chaque produit occupe 100% de la largeur (une seule colonne) */
+    }
+  
+    .col-4 img {
+        height: 200px; /* Réduit la hauteur des images sur mobile */
+    }
+  
+    .prix {
+        font-size: 1rem; /* Réduit la taille de la police sur mobile */
+    }
+  
+    .add-to-cart {
+        padding: 8px 16px; /* Ajuste la taille du bouton sur mobile */
+    }
+  }
+
+
+
+  @media (max-width: 768px) {
+    /* Ta config existante */
+    .texte h2 {
+      font-size: 24px;
+    }
+  
+    .texte p {
+      font-size: 16px;
+    }
+  
+    .menu1 img {
+      width: 150px;
+    }
+  
+    .panier i {
+      font-size: 30px;
+    }
+  }
+
+  
+
+
+
+  /* Responsive */
+@media screen and (max-width: 768px) {
+    .footer-top, .footer-bottom {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  .footer-align-barre {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 30px;
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    flex-wrap: wrap;
+  }
+  
+  .footer-section {
+    min-width: 200px;
+  }
+  
+  .footer-section h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #000;
+  }
+  
+  .footer-section p,
+  .footer-section li {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-bar {
+    font-size: 28px;
+    color: #ccc;
+    line-height: 1;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+    .footer-align-barre {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footer-bar {
+      display: none;
+    }
+  }
+  
+  
+  .grande-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .image-dominante img {
+    width: 500px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 768px) {
+  .image-dominante img {
+    max-width: 10%;
+  }
+}
+
+  
+
+  .produits-lateraux {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex: 1;
+    padding-top: 10px;
+  }
+  
+  .produit {
+    width: 160px;
+    height: 230px;
+    background: #f3f3f3;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .produit img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover; /* force à remplir le cadre sans déformer */
+    border-radius: 6px;
+  }
+  
+  .prix {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .add-to-cart {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #F6A9B7;
+    padding: 6px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .add-to-cart:hover {
+    background-color: #F28D94;
+  }
+  
+  
+  @media screen and (max-width: 900px) {
+    /* Masquer l'original .me */
+    .menu {
+      display: none !important;
+    }
+  }
+  
+  /* Styles par défaut pour ordinateur (tout aligné horizontalement) */
+  .menu1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+  }
+  
+  .logo {
+    width: 120px;
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #fff;
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 5px;
+  }
+  
+  .panier {
+    position: relative;
+    font-size: 20px;
+    margin-left: 10px;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    font-size: 11px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+  }
+  
+  /* Media query pour mobile */
+  @media (max-width: 600px) {
+    .menu1 {
+      flex-direction: column; /* Le logo se centre et les autres éléments passent sous */
+      align-items: center;
+      padding: 15px;
+    }
+  
+    .row {
+      width: 100%;
+      justify-content: center;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row; /* Recherche et panier côte à côte */
+      gap: 10px;
+    }
+  
+    .search-box {
+      max-width: 70%; /* Ajuste la taille de la recherche */
+    }
+  
+    .panier {
+      margin-left: 10px;
+    }
+  }
+  
+  
+  .livreur {
+    display: none; /* Caché par défaut (ordinateur) */
+  }
+  
+  .livraison {
+    margin: 0;
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  /* Affichage uniquement sur mobile */
+  @media (max-width: 600px) {
+    .livreur {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #F6A9B7;
+    }
+  }
+  
+
+
+  
+  /* Responsivité pour les petits écrans */
+/* 2 éléments côte à côte sur mobile */
+@media (max-width: 768px) {
+    .col-3 {
+      width: 50%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .col-3 {
+      width: 50%;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+  .products-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-card {
+    width: 80%;
+  }
+}
+
+
+.montitre {
+  text-align: center;
+  margin: 40px auto;
+  padding: 20px;
+ 
+  border-radius: 10px;
+  width: fit-content;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.montitre h2 {
+  color: #e63946;
+  font-size: 2.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+
+.banniere-container {
+      width: 100%;
+      background-color: #FFC0CB;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 20px 0;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .banniere-texte {
+      display: inline-block;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #000;
+      position: absolute;
+      animation: defilement-fluide 30s ease-in-out infinite alternate;
+    }
+
+    @keyframes defilement-fluide {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+    .natou {
+      display: none;
+    }
+  }
+
+
+
+@media (max-width: 768px) {
+    .nav-menu.active .info-item {
+        display: block;
+    }
+}
+/* Afficher l'email uniquement dans le menu mobile (petits écrans) */
+.mobile-email {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .mobile-email {
+        display: block; /* Affiche l'email dans le menu mobile */
+    }
+}
+
+/* Optionnel: vous pouvez masquer cette entrée de menu pour les grands écrans */
+@media screen and (min-width: 769px) {
+    .mobile-email {
+        display: none; /* Masque l'email sur les grands écrans */
+    }
+}
+
+/* Afficher les horaires d'ouverture et l'adresse uniquement dans le menu mobile (petits écrans) */
+.mobile-info {
+    display: none;
+}
+/* Masquer les horaires et l'adresse dans le menu mobile sur les grands écrans */
+@media screen and (max-width: 768px) {
+    .mobile-info {
+        display: block; /* Affiche les informations dans le menu mobile */
+        padding: 10px 0; /* Espacement pour rendre plus lisible */
+        font-size: 16px; /* Ajuste la taille de la police si nécessaire */
+    }
+}
+
+/* Optionnel: vous pouvez masquer ces éléments de menu pour les grands écrans */
+@media screen and (min-width: 769px) {
+    .mobile-info {
+        display: none; /* Masque ces informations sur les grands écrans */
+    }
+}
+
+
+/* Appliquer un défilement vertical au menu mobile */
+/* Menu pour les grands écrans (au-dessus de 768px) */
+.nav-menu {
+    overflow: visible;  /* Empêche le défilement et donc les flèches */
+}
+/* Appliquer un défilement vertical au menu mobile */
+@media screen and (max-width: 768px) {
+    .nav-menu {
+        max-height: 98vh; /* Limite la hauteur du menu à 90% de la hauteur de l'écran */
+        overflow-y: auto; /* Permet le défilement vertical sur mobile */
+        padding-right: 10px; /* Ajoute un léger padding à droite pour que le défilement soit visible */
+    }
+}
+
+
+/* Menu déroulant sur grands écrans */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block; /* Affiche le sous-menu lorsqu'on survole */
+}
+
+/* Cache le sous-menu par défaut */
+.dropdown-menu {
+    display: none; /* Le menu est caché par défaut */
+    position: absolute; /* Positionne le sous-menu par rapport à son parent */
+    background-color: #fff; /* Couleur de fond du sous-menu */
+    border: 1px solid #ddd; /* Bordure pour délimiter le menu */
+    z-index: 10; /* S'assure que le menu se superpose aux autres éléments */
+}
+
+/* Style supplémentaire pour le menu sur les grands écrans */
+@media screen and (min-width: 768px) {
+    .nav-item.dropdown {
+        position: relative; /* Nécessaire pour positionner correctement le sous-menu */
+    }
+}
+
+.phone-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; /* espace entre l'icône et le texte */
+}
+
+.phone-icon {
+    font-size: 40px; /* taille de l'icône */
+    line-height: 1;
+    padding-top: 2px; /* aligne verticalement avec le texte */
+}
+
+.phone-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    line-height: 1.4;
+}
+/* Masquer sur grands écrans */
+.mobile-social-icons {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .natou {
+      display: none;
+    }
+  }
+  
+  
+  /* Afficher sur petits écrans et aligner les icônes en ligne */
+  @media screen and (max-width: 900px) {
+    .mobile-social-icons {
+      display: flex;
+      justify-content: flex-end; /* Aligne à droite */
+      gap: 15px;
+      margin-top: 15px;
+      padding-right: 20px; /* Facultatif : espace depuis le bord droit */
+    }
+  
+    .mobile-social-icons a {
+      font-size: 1.5rem;
+      color: #333;
+      text-decoration: none;
+    }
+  
+    .mobile-social-icons a:hover {
+      color: #d09ea0;
+    }
+  }
+  
+  
+  .natou {
+    margin-top: 20px; /* Ajoute un peu d’espace par rapport au haut */
+    transform: translateY(10px); /* Cela remonte l'élément vers le haut */
+  }
+  .coordonnees {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    margin: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end; /* Aligne à droite */
+}
+
+.coordonnees .nav-item {
+    text-decoration: none; /* Enlève le soulignement */
+    color: #333; /* Couleur du texte (modifiable) */
+    font-weight: bold;
+}
+
+.tel-block {
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none;
+    color: #333;
+    gap: 10px;
+}
+
+.icon-phone {
+    font-size: 38px; /* Icône plus grande */
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.phone-text .label {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.phone-text .numbers {
+    font-size: 15px;
+}
+
+
+

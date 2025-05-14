@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Habit</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="col2.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .menu {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      background-color: #f8f8f8;
+    }
+
+    .menu a {
+      color: #000;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .menu1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #fff;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .menu1 img {
+      height: 60px;
+    }
+
+    .panier {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .cart-count {
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+      padding: 2px 6px;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+
+    #panier-content {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: #fff;
+      position: absolute;
+      top: 100px;
+      right: 20px;
+      width: 250px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    #panier-content .close-btn {
+      font-size: 18px;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+    }
+
+    #cart-items li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      justify-content: space-between;
+    }
+
+    #cart-items img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .categories {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .col-3 {
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 200px;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    .col-3 img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .prix {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .add-to-cart {
+      display: inline-block;
+      margin-top: 10px;
+      color: #fff;
+      background-color: #28a745;
+      padding: 8px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+
+    .add-to-cart:hover {
+      background-color: #218838;
+    }
+
+    .remove-btn {
+      background-color: #f44336;
+      color: white;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background-color: #d32f2f;
+    }
+
+  </style>
+</head>
+<body>
+<!-- Message qui s'affiche après l'ajout d'un produit -->
+<div id="message-ajout" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color:#28a745; color:white; padding:10px 20px; border-radius:5px; box-shadow:0 4px 6px rgba(0,0,0,0.1); z-index:1000;">
+    Vous avez ajouté <span id="product-name"></span> au panier !
+  </div>
+  <div id="message-suppression" style="display: none; position:fixed; top:60px; left:50%; transform:translateX(-50%); background: #dff0d8; color: #3c763d; padding: 10px 20px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index:1000;">
+   le produit a été supprimé <span id="product-name"></span> du panier !
+  </div>
+  
+  
+  
+  <!-- Réseaux sociaux -->
+  <div class="menu">
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+  </div>
+
+  <!-- Logo et panier -->
+  <div class="menu1">
+    <img src="images/logo.PNG" alt="Logo">
+    <div class="panier" id="panier-icon">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      <span class="cart-count">0</span>
+    </div>
+  </div>
+
+  <!-- Panier déroulant -->
+  <div id="panier-content">
+    <span class="close-btn" id="close-panier">×</span>
+    <ul id="cart-items"></ul>
+    <p>Total : <span id="cart-total">0.00€</span></p>
+    <a href="commande.html" class="commander-btn">Commander</a>
+  </div>
+
+  <!-- Section catégories -->
+  <section class="categories">
+    <h2>Nos Collections</h2>
+    <div class="premierpartie">
+        <div class="row">
+            <div class="col-4">
+                <div class="product-img-wrapper">
+                    <img src="imagepetit/im1.jpeg" alt="Boucles d’oreilles" class="product-img">
+                    <i class="fa fa-search-plus" onclick="openModal('imagepetit/im1.jpeg', '5000', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+                </div>
+                <div class="product-info">
+                  <p class="prix">5000F</p>
+                    <a href="#" class="add-to-cart" data-name="CREME DE VISAGE CARAMEL GLOW" data-price="5000" data-img="imagepetit/im1.jpeg">Ajouter au panier →</a>
+                </div>
+            </div>
+        
+            <div class="col-4">
+              <div class="product-img-wrapper">
+                  <img src="imagepetit/im4.jpeg" alt="Boucles d’oreilles" class="product-img">
+                  <i class="fa fa-search-plus" onclick="openModal('imagepetit/im1.jpeg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+              </div>
+          
+              <!-- Ajout de la div content ici -->
+              <div class="content">
+                  <div class="product-info">
+                      <p class="prix">5€</p>
+                      <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="imagepetit/im1.jpeg">
+                          Ajouter au panier →
+                      </a>
+                  </div>
+              </div>
+          </div>
+          
+      
+
+          <div class="col-4">
+            <div class="product-img-wrapper">
+                <img src="imagepetit/im3.jpeg" alt="Boucles d’oreilles" class="product-img">
+                <i class="fa fa-search-plus" onclick="openModal('imagepetit/im3.jpeg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+            </div>
+        
+            <!-- Ajout de la div content ici -->
+            <div class="content">
+                <div class="product-info">
+                    <p class="prix">5€</p>
+                    <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="imagepetit/im3.jpeg">
+                        Ajouter au panier →
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    
+    
+
+        <div class="col-4">
+          <div class="product-img-wrapper">
+              <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+              <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+          </div>
+          <div class="product-info">
+              <p class="prix">5€</p>
+              <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+          </div>
+      </div>
+  
+              
+     
+    <div class="col-4">
+      <div class="product-img-wrapper">
+          <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+          <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+      </div>
+      <div class="product-info">
+          <p class="prix">5€</p>
+          <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+      </div>
+  </div>
+
+
+  <div class="col-4">
+    <div class="product-img-wrapper">
+        <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+        <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+    </div>
+    <div class="product-info">
+        <p class="prix">5€</p>
+        <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+    </div>
+</div>
+
+
+<div class="col-4">
+  <div class="product-img-wrapper">
+      <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+      <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+  </div>
+  <div class="product-info">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+  </div>
+</div>
+
+
+<div class="col-4">
+  <div class="product-img-wrapper">
+      <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+      <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+  </div>
+  <div class="product-info">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+  </div>
+</div>
+
+
+<div class="col-4">
+  <div class="product-img-wrapper">
+      <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+      <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+  </div>
+  <div class="product-info">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+  </div>
+</div>
+
+
+<div class="col-4">
+  <div class="product-img-wrapper">
+      <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+      <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+  </div>
+  <div class="product-info">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+  </div>
+</div>
+
+
+            <div class="col-4">
+              <div class="product-img-wrapper">
+                  <img src="imagepetit/im1.jpeg" alt="Boucles d’oreilles" class="product-img">
+                  <i class="fa fa-search-plus" onclick="openModal('imagepetit/im1.jpeg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+              </div>
+              <div class="product-info">
+                  <p class="prix">5€</p>
+                  <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+              </div>
+          </div>
+      
+
+          <div class="col-4">
+            <div class="product-img-wrapper">
+                <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+                <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+            </div>
+            <div class="product-info">
+                <p class="prix">5€</p>
+                <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+            </div>
+        </div>
+    
+        <div class="col-4">
+          <div class="product-img-wrapper">
+              <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+              <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+          </div>
+          <div class="product-info">
+              <p class="prix">5€</p>
+              <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+          </div>
+      </div>
+  
+
+      <div class="col-4">
+        <div class="product-img-wrapper">
+            <img src="imagepetit/b.jpg" alt="Boucles d’oreilles" class="product-img">
+            <i class="fa fa-search-plus" onclick="openModal('imagepetit/b.jpg', '5', 'Boucles d’oreilles', 'images/boucle.jpg')"></i>
+        </div>
+        <div class="product-info">
+            <p class="prix">5€</p>
+            <a href="#" class="add-to-cart" data-name="Boucles d’oreilles" data-price="5" data-img="images/boucle.jpg">Ajouter au panier →</a>
+        </div>
+    </div>
+ 
+        </div>
+    </div>
+</section>
+
+
+<div id="imageModal" class="modal">
+  <div class="modal-content-wrapper horizontal-layout">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <img id="modalImage" src="" alt="Agrandissement du produit">
+
+    <div class="product-details">
+      <p id="modalPrice" class="prix">5€</p>
+      <a href="#" id="modalAddToCart" class="add-to-cart" 
+         data-name="" data-price="" data-img="">Ajouter au panier →</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+  <!-- Script panier -->
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartIcon = document.getElementById("panier-icon");
+    const cartContent = document.getElementById("panier-content");
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.querySelector(".cart-count");
+    const closeBtn = document.getElementById("close-panier");
+  
+    // Fonction de formatage FCFA
+    function formatFCFA(number) {
+      return number.toLocaleString('fr-FR', { minimumFractionDigits: 0 }) + " FCFA";
+    }
+  
+    // Mettre à jour l'affichage du panier
+    function updateCartDisplay() {
+      cartItems.innerHTML = "";
+      let total = 0;
+  
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <img src="${item.img}" alt="${item.name}" width="50">
+          <div>
+            <p>${item.name}</p>
+            <p>${formatFCFA(item.price)}</p>
+          </div>
+          <button class="remove-btn" data-index="${index}">Supprimer</button>
+        `;
+        cartItems.appendChild(li);
+        total += item.price;
+      });
+  
+      cartTotal.textContent = formatFCFA(total);
+      cartCount.textContent = cart.length;
+  
+      // Ajouter l'événement de suppression
+      document.querySelectorAll(".remove-btn").forEach(button => {
+        button.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const index = this.getAttribute("data-index");
+          const removedProduct = cart.splice(index, 1)[0];
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartDisplay();
+          afficherMessageSuppression(removedProduct.name);
+        });
+      });
+    }
+  
+    // Ajouter au panier depuis la page produit
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
+        const name = this.getAttribute("data-name");
+        const price = parseFloat(this.getAttribute("data-price")); // Ce prix est déjà en FCFA
+        const img = this.getAttribute("data-img");
+  
+        cart.push({ name, price, img });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartDisplay();
+        afficherMessageAjout(name);
+      });
+    });
+  
+    // Ajouter depuis modale
+    document.getElementById('modalAddToCart')?.addEventListener('click', function (e) {
+      e.preventDefault();
+      const name = this.getAttribute('data-name');
+      const price = parseFloat(this.getAttribute('data-price')); // FCFA
+      const img = this.getAttribute('data-img');
+  
+      cart.push({ name, price, img });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartDisplay();
+      closeModal();
+      afficherMessageAjout(name);
+    });
+  
+    // Toggle panier
+    cartIcon.addEventListener("click", () => {
+      cartContent.style.display = (cartContent.style.display === "block") ? "none" : "block";
+    });
+  
+    // Fermer le panier
+    closeBtn.addEventListener("click", () => {
+      cartContent.style.display = "none";
+    });
+  
+    // Fermer si clic en dehors
+    document.addEventListener("click", function (e) {
+      if (!cartContent.contains(e.target) && !cartIcon.contains(e.target)) {
+        cartContent.style.display = "none";
+      }
+    });
+  
+    // Message ajout
+    function afficherMessageAjout(nomProduit) {
+      const messageBox = document.getElementById("message-ajout");
+      messageBox.textContent = `Vous avez ajouté ${nomProduit} au panier.`;
+      messageBox.style.display = "block";
+      setTimeout(() => {
+        messageBox.style.display = "none";
+      }, 5000);
+    }
+  
+    // Message suppression
+    function afficherMessageSuppression(nomProduit) {
+      const messageBox = document.getElementById("message-suppression");
+      messageBox.textContent = `Vous avez supprimé le produit : ${nomProduit}`;
+      messageBox.style.display = "block";
+      setTimeout(() => {
+        messageBox.style.display = "none";
+      }, 3000);
+    }
+  
+    // Initialisation
+    updateCartDisplay();
+  </script>
+  
+  
+<script src="scri.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accueil</title>
+  <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
+
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="sr.css"/>
+  <link rel="stylesheet" href="responsive.css"/>
+  <link rel="stylesheet" href="stylee.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+  <style>
+    .side-menu { display: none; }
+    .side-menu.active { display: block; }
+      .panier {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .cart-count {
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+      padding: 2px 6px;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+
+   #panier-content {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: #fff;
+      position: absolute;
+      top: 100px;
+      right: 20px;
+      width: 250px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    #panier-content .close-btn {
+      font-size: 18px;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+    }
+
+    #cart-items li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      justify-content: space-between;
+    }
+
+    #cart-items img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .categories {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .col-3 {
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 200px;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    .col-3 img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .prix {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .add-to-cart {
+      display: inline-block;
+      margin-top: 10px;
+      color: #fff;
+      background-color: #FFC0CB;
+      padding: 8px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+
+    .add-to-cart:hover {
+      background-color: #D9A14E;
+    }
+
+    .remove-btn {
+      background-color: #f44336;
+      color: white;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background-color: #d32f2f;
+    }
+
+  </style>
+   
+</head>
+<body>
+  <div id="message-ajout" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color:#28a745; color:white; padding:10px 20px; border-radius:5px; box-shadow:0 4px 6px rgba(0,0,0,0.1); z-index:1000;">
+    Vous avez ajouté <span id="product-name"></span> au panier !
+  </div>
+  <div id="message-suppression" style="display: none; position:fixed; top:60px; left:50%; transform:translateX(-50%); background: #dff0d8; color: #3c763d; padding: 10px 20px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index:1000;">
+   le produit a été supprimé <span id="product-name"></span> du panier !
+  </div>
+
+  <!-- Réseaux sociaux -->
+
+
+  <div class="livreur">
+      <p class="livraison">LIVRAISON EN MOINS DE 24H À DAKAR</p>
+      
+  </div>
+  
+
+  <div class="menu">
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+    <div class="me">
+  </div>
+  <div class="natou">
+          <ul class="coordonnees">
+            <li>
+              <a href="#" class="nav-item tel-block">
+                <span class="icon-phone">📍</span>
+                <div class="phone-text">
+                  <div class="label">Adresse :</div>
+                  <div class="numbers">Ouakam Coté Monument de la renaissance</div>
+                </div>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="nav-item tel-block">
+                <span class="icon-phone">📞</span>
+                <div class="phone-text">
+                  <div class="label">Téléphone :</div>
+                  <div class="numbers">+221 78 658 53 53 / +221 76 427 49 40 / 33 820 75 19</div>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="nav-item tel-block">
+                <span class="icon-phone">📧</span>
+                <div class="phone-text">
+                  <div class="label">Email :</div>
+                  <div class="numbers">raffetskin@gmail.com</div>
+                </div>
+              </a>
+            </li>
+  
+            <li>
+              <a href="#" class="nav-item tel-block">
+                <span class="icon-phone">🕒</span>
+                <div class="phone-text">
+                  <div class="label"> Horaires :</div>
+                  <div class="numbers">Lun - Sam : 10h - 18h</div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+  </div>
+
+  <!-- Logo et Panier -->
+  <div class="menu1">
+    <img src="images/logorafet.jpeg" alt="Logo" class="logo">
+  
+    <div class="row">
+      <div class="search-box">
+        <input type="search" placeholder="Rechercher des produits" />
+        <i class="fa fa-search"></i>
+      </div>
+  
+      <div class="panier" id="panier-icon">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Panier déroulant -->
+  <div id="panier-content" style="display: none;">
+    <div class="close-panier" id="close-panier-btn"><i class="fa fa-times"></i></div>
+    <ul id="cart-items"></ul>
+    <p>Total : <span id="cart-total">0 F</span></p>
+    <a href="commande.html" class="commander-btn">Commander</a>
+  </div>
+
+  <!-- Menu Hamburger -->
+  <header>
+    <div class="container">
+    <nav class="navbar section-content">
+        <a href="#" class="nav-logo">
+          <h2 class="logo-text">
+            <span class="raffet">Raffet</span>
+            <span class="skin">Skin</span>
+          </h2>
+          
+        </a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+              <li class="nav-item dropdown">
+                      <span class="nav-link">Nos Gammes <span class="chevron">▾</span></span>
+                      <ul class="dropdown-menu">
+                        <li><a href="elixir.html">🧖 Gammes Elixir</a></li>
+                        <li><a href="#">💆 Gammes Caramel</a></li>
+                         <li><a href="#">💆 Gammes Melanil</a></li>
+                      </ul>
+                    </li>
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a href="chausure.html" class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item mobile-email">
+                      <span class="nav-link">📧 <strong>Email :</strong> raffetskin@gmail.com</span>
+                  </li>
+                  
+                  
+                  <li class="nav-item mobile-email">
+                    <span class="nav-link">📞<strong> Téléphone  :</strong><br> +221 78 658 53 53 / +221 76 427 49 40 / 33 820 75 19</span>
+                </li>
+                <li class="nav-item mobile-info">
+                  <span class="nav-link">⏰ Horaires d'ouverture : Lun - Sam : 10h - 18h</span>
+              </li>
+              <li class="nav-item mobile-info">
+                  <span class="nav-link">📍 Adresse :<br> Ouakam Coté Monument de la renaissance </span>
+              </li>
+                    
+              <li class="nav-item mobile-social-icons">
+                <a href="https://facebook.com/keynaspa" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/keynaspa" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+              </li>
+             
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+
+    </nav>
+</div>
+</header>
+  
+
+  <!-- Slides -->
+  <div class="slider">
+    <div class="slide active">
+      <img src="images/im1.jpeg" alt="Boucles d’oreilles">
+      
+    </div>
+    <div class="slide">
+      <img src="images/im2.jpeg" alt="Habits africains">
+      
+    </div>
+  </div>
+
+  
+
+  <!-- Nos Collections -->
+   <section class="section-produits">
+    <h2>Découvrez notre sélection du moment</h2>
+    <div class="grille-produits">
+  
+      <div class="carte-produit">
+        <img src="imagepetit/eli.jpeg" alt="Elixir">
+        <div class="texte-produit">
+          <a href="elixir.html">Découvrir nos Gammes Elixir</a>
+        </div>
+      </div>
+  
+      <div class="carte-produit">
+        <img src="images/im2.jpeg" alt="Caramel">
+        <div class="texte-produit">
+          <a href="habit.html">Découvrir nos Gammes Caramel</a>
+        </div>
+      </div>
+  
+      <div class="carte-produit">
+        <img src="images/im1.jpeg" alt="Melanines">
+        <div class="texte-produit">
+          <a href="meschaussures.html">Découvrir nos Gammes Melanines</a>
+        </div>
+      </div>
+  
+      <div class="carte-produit">
+        <img src="images/im3.jpeg" alt="Melanines 2">
+        <div class="texte-produit">
+          <a href="meschaussures.html">Découvrir nos Melanines</a>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+  
+  <div id="message-ajout" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color:#28a745; color:white; padding:10px 20px; border-radius:5px; box-shadow:0 4px 6px rgba(0,0,0,0.1); z-index:1000;">
+    Vous avez ajouté <span id="product-name"></span> au panier !
+  </div>
+  
+<div class="banniere-container">
+    <div class="banniere-texte">
+      Bienvenue dans votre espace beauté nouvelle génération, où spa, gommage et soins sur-mesure révèlent votre éclat au naturel.
+    </div>
+  </div>
+  <div class="grande-section">
+    <!-- Image dominante à gauche -->
+    <div class="image-dominante">
+      <img src="images/detente.jpeg" alt="Eli">
+    </div>
+  
+    <!-- Produits alignés à droite -->
+    <div class="produits-lateraux">
+      <div class="produit">
+        <img src="images/sauna.jpeg" alt="Produit 1">
+        <p class="prix">12000 F</p>
+        <p>Sauna</p>
+        <a href="#" class="add-to-cart">Ajouter au panier →</a>
+      </div>
+      <div class="produit">
+        <img src="images/soins.jpeg" alt="Produit 1">
+        <p class="prix">12000 F</p>
+        <p>Soins</p>
+        <a href="#" class="add-to-cart">Ajouter au panier →</a>
+      </div>
+      <div class="produit">
+        <img src="images/pedicure.jpg" alt="Produit 1">
+        <p class="prix">12000 F</p>
+        <p>Sauna</p>
+        <a href="#" class="add-to-cart">Ajouter au panier →</a>
+      </div>
+      <div class="produit">
+        <img src="images/gommagecorps.jpeg" alt="Produit 1">
+        <p class="prix">12000 F</p>
+        <p>Sauna</p>
+        <a href="#" class="add-to-cart">Ajouter au panier →</a>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  <div class="montitre">
+  <h2>NOOOOOO</h2>
+</div>
+  <div class="grid-produits">
+    <div class="carte-produit">
+      <img src="elixir/e1.jpeg" alt="Produit 1">
+      <p class="prix">5000F</p>
+      <a href="#" class="add-to-cart" data-name="Produit 1" data-price="5000" data-img="elixir/e1.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="imagepetit/im4.jpeg" alt="Produit 2">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 2" data-price="5" data-img="imagepetit/im4.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+     <a href="elixir/e2.jpeg">
+      <img src="elixir/e2.jpeg" alt="Produit 3">
+      </a> 
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 3" data-price="5" data-img="elixir/e2.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="elixir/e3.jpeg" alt="Produit 4">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 4" data-price="5" data-img="elixir/e3.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="elixir/e4.jpeg" alt="Produit 5">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 5" data-price="5" data-img="elixir/e4.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="elixir/e5.jpeg" alt="Produit 6">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 6" data-price="5" data-img="elixir/e5.jpeg">Ajouter au panier →</a>
+    </div>
+    <div class="carte-produit">
+      <img src="elixir/e5.jpeg" alt="Produit 6">
+      <p class="prix">5€</p>
+      <a href="#" class="add-to-cart" data-name="Produit 6" data-price="5" data-img="elixir/e5.jpeg">Ajouter au panier →</a>
+    </div>
+  </div>
+  
+
+
+
+  
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-feature">
+        <i class="fa fa-truck"></i>
+        <div>
+          <strong>Dakar</strong><br>
+          Livraison<br>
+          <span>En moins de 24h sur Dakar</span>
+        </div>
+      </div>
+      <div class="footer-feature">
+        <i class="fa fa-medal"></i>
+        <div>
+          <strong>Dakar</strong><br>
+          
+          <span>Produits de bonne qualité</span>
+        </div>
+      </div>
+      <div class="footer-feature">
+        <i class="fa fa-money-bill-wave"></i>
+        <div>
+          <strong>Dakar</strong><br>
+          Paiement au choix<br>
+          <span>Espèces – Orange Money </span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer-align-barre">
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <p>contact@universcosmetix.com</p>
+        <p>+221 78 308 37 37</p>
+      </div>
+    
+      <div class="footer-bar">|</div>
+    
+      <div class="footer-section">
+        <h4>Catégories</h4>
+        <ul>
+          <li>Cadeau & Promo</li>
+          <li>Cheveux</li>
+          <li>Corps & Bain</li>
+          <li>Maquillage</li>
+          <li>PARAPHARMACIE</li>
+        </ul>
+      </div>
+    
+      <div class="footer-bar">|</div>
+    
+      <div class="footer-section">
+        <h4>Informations pratiques</h4>
+        <ul>
+          <li>Nos Marques</li>
+          <li>Mon compte</li>
+          <li>Blog</li>
+          <li>Condition d’utilisations</li>
+          <li>Livraison</li>
+          <li>Politique de cookies (UE)</li>
+        </ul>
+      </div>
+    
+      <div class="footer-bar">|</div>
+    
+      <div class="footer-section">
+        <h4>Suivez-nous</h4>
+        <p>Paiement sécurisé</p>
+      </div>
+    </div>
+  </footer>    
+  <div id="message-ajout" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color:#28a745; color:white; padding:10px 20px; border-radius:5px; box-shadow:0 4px 6px rgba(0,0,0,0.1); z-index:1000;">
+  Vous avez ajouté <span id="product-name"></span> au panier !
+</div>
+
+  
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  // === MENU LATÉRAL ===
+  const toggleBtn = document.getElementById("menu-toggle");
+  const sideMenu = document.getElementById("side-menu");
+  const closeBtn = document.getElementById("close-btn");
+
+  toggleBtn?.addEventListener("click", function (event) {
+    event.stopPropagation();
+    sideMenu?.classList.toggle("active");
+  });
+
+  closeBtn?.addEventListener("click", function (event) {
+    event.stopPropagation();
+    sideMenu?.classList.remove("active");
+  });
+
+  sideMenu?.addEventListener("click", function (event) {
+    event.stopPropagation();
+  });
+
+  document.addEventListener("click", function (event) {
+    const isClickInside = sideMenu?.contains(event.target);
+    const isClickOnToggle = toggleBtn?.contains(event.target);
+    if (!isClickInside && !isClickOnToggle) {
+      sideMenu?.classList.remove("active");
+    }
+  });
+
+  // === SLIDER AUTOMATIQUE ===
+  let slides = document.querySelectorAll(".slide");
+  let index = 0;
+  if (slides.length > 0) {
+    slides[0].classList.add("active");
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 4000);
+  }
+
+  // === PANIER ===
+  const panierIcon = document.getElementById("panier-icon");
+  const panierContent = document.getElementById("panier-content");
+  const closePanierBtn = document.getElementById("close-panier-btn");
+  const addToCartButtons = document.querySelectorAll(".add-to-cart");
+  const cartItems = document.getElementById("cart-items");
+  const cartTotal = document.getElementById("cart-total");
+  const cartCount = document.querySelector(".cart-count");
+  const messageAjout = document.getElementById("message-ajout");
+  const productNameSpan = document.getElementById("product-name");
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  panierIcon?.addEventListener("click", () => {
+    panierContent.style.display = panierContent.style.display === "block" ? "none" : "block";
+  });
+
+  closePanierBtn?.addEventListener("click", () => {
+    panierContent.style.display = "none";
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!panierContent.contains(e.target) && !panierIcon.contains(e.target)) {
+      panierContent.style.display = "none";
+    }
+  });
+
+  // Ajouter un produit au panier
+  addToCartButtons.forEach(button => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      let produit = this.closest(".produit") || this.closest(".carte-produit");
+      let nom = "";
+      let prix = 0;
+      let img = "";
+
+      // Section 1 : .produit
+      if (produit.classList.contains("produit")) {
+        nom = produit.querySelector("p:nth-child(3)")?.innerText || "Produit";
+        let prixText = produit.querySelector(".prix")?.innerText || "0";
+        prixText = prixText.replace(/[^\d]/g, "");
+        prix = parseFloat(prixText);
+        img = produit.querySelector("img")?.src || "";
+      }
+
+      // Section 2 : .carte-produit
+      else if (produit.classList.contains("carte-produit")) {
+        nom = this.getAttribute("data-name") || "Produit";
+        prix = parseFloat(this.getAttribute("data-price")) || 0;
+        img = this.getAttribute("data-img") || "";
+      }
+
+      const item = { name: nom, price: prix, img };
+      cart.push(item);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartDisplay();
+
+      // Message de confirmation
+      if (productNameSpan && messageAjout) {
+        productNameSpan.textContent = nom;
+        messageAjout.style.display = "block";
+        setTimeout(() => {
+          messageAjout.style.display = "none";
+        }, 2500);
+      }
+    });
+  });
+
+  function updateCartDisplay() {
+    cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.style.listStyle = "none";
+      li.style.padding = "10px";
+      li.style.borderBottom = "1px solid #ddd";
+
+      li.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="${item.img}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+          <div style="flex-grow: 1;">
+            <p style="margin: 0; font-weight: bold;">${item.name}</p>
+            <p style="margin: 0;">${item.price} FCFA</p>
+          </div>
+          <button 
+            class="remove-btn" 
+            data-index="${index}"
+            style="
+              background-color: red;
+              color: white;
+              border: none;
+              padding: 5px 10px;
+              border-radius: 4px;
+              cursor: pointer;
+            "
+          >
+            Supprimer
+          </button>
+        </div>
+      `;
+      cartItems.appendChild(li);
+      total += item.price;
+    });
+
+    cartTotal.textContent = total.toFixed(0) + " FCFA";
+    if (cartCount) cartCount.textContent = cart.length;
+
+    // Gestion des suppressions
+    document.querySelectorAll(".remove-btn").forEach(button => {
+      button.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const index = this.getAttribute("data-index");
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartDisplay();
+      });
+    });
+  }
+
+  // Initialisation affichage du panier
+  updateCartDisplay();
+
+  // === MISE À JOUR AUTOMATIQUE TOUTES LES 2 SECONDES ===
+  setInterval(updateCartDisplay, 2000);
+});
+</script>
+
+</script>
+
+
+
+  
+
+  
+  
+  <script src="scri.js"></script>
+</body>
+</html>

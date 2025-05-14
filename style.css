@@ -1,0 +1,758 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+
+  /* Style du cadre rose */
+  .search-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid pink;
+    border-radius: 25px;
+    padding: 5px 15px;
+    background-color: #fff;
+    max-width: 300px;
+    width: 100%;
+  }
+  
+  /* Input centré avant focus, puis aligné à gauche */
+  .search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  /* Quand on clique pour saisir, on repasse en alignement à gauche */
+  .search-box input:focus {
+    text-align: left;
+  }
+  
+  /* Icône rose alignée à droite */
+  .search-box i {
+    margin-left: 10px;
+    font-size: 18px;
+    color: pink;
+    cursor: pointer;
+  }
+  
+  
+  .menu1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px; /* 5px en haut/bas, 10px à gauche/droite */
+    background-color: white;
+  }
+  
+
+  .menu1 img{
+    width: 100px;
+  }
+
+  .panier{
+    display: flex;
+    align-items: right;
+  }
+
+  .panier i {
+    font-size: 40px;
+    color: black;
+    cursor: pointer;
+    color: #FFC0CB;
+}
+
+.slash {
+    margin: 0 5px; 
+    font-size: 50px; 
+  }
+
+    .menu-toggle {
+        font-size: 24px;
+        padding: 10px;
+        cursor: pointer;
+        background-color: #FFC0CB;
+        
+      }
+
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 200px;
+        height: 100%;
+        background-color: #FFC0CB;
+        padding-top: 60px;
+        transition: left 0.3s ease;
+        z-index: 999; /* très en avant */
+      }
+      
+      .side-menu ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      
+      .side-menu ul li {
+        margin: 20px 0;
+        text-align: center;
+      }
+      
+      .side-menu ul li a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+      }
+      .side-menu.active {
+        left: 0;
+      }
+
+      
+      
+      
+        /* slider */
+      
+        
+      .texte {
+        position: relative;
+        z-index: 1;
+        color: white;
+        text-align: center;
+        max-width: 90%;
+        margin: auto;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding: 0; /* plus de padding */
+        background-color: transparent; /* plus de fond noir transparent */
+        border-radius: 0; /* plus d'arrondis */
+      }
+      
+     
+     /* Slide fixe à la taille du slider (qui fait lui-même 754.38×400) */
+
+    /* ===== Slider agrandi ===== */
+    .slider {
+      position: relative;
+      width: 100%; /* Remplir toute la largeur du conteneur */
+      height: 100vh; /* Remplir toute la hauteur de la fenêtre */
+      overflow: hidden; /* Empêcher l'image de déborder */
+      margin: 0;
+      padding-top: 0;
+      border: none;
+    }   
+
+/* ===== Slide unchanged ===== */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.slide.active {
+  opacity: 1;
+}
+
+/* ===== Image agrandie ===== */
+.slide img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Remplir tout le conteneur */
+  margin: 0;
+  padding: 0;
+  z-index: 0;
+}
+
+
+.texte {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;           /* au-dessus de l’image */
+  color: #fff;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+
+      
+     
+      .cart-count {
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 3px 7px;
+        font-size: 12px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      .panier {
+        position: relative;
+      }
+      
+      
+      /* Texte style */
+      
+      .texte h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+      
+      .texte p {
+        font-size: 20px;
+        line-height: 1.4;
+      }
+.elix {
+  width: 100%;         /* Occupe toute la largeur disponible */
+  height: 300px;       /* Hauteur fixe (tu peux ajuster selon ton besoin) */
+  overflow: hidden;    /* Cache les débordements */
+}
+
+.elix img {
+  width: 100%;         /* L’image prend toute la largeur */
+  height: 100%;        /* L’image prend toute la hauteur */
+  object-fit: cover;   /* Remplit le conteneur sans déformation, quitte à rogner */
+  display: block;      /* Évite les marges internes par défaut */
+}
+
+     
+
+      .slide.active a{
+        font-size: 25px;
+        display: inline-block;
+        text-decoration: none;
+    padding: 10px;
+    margin: 10px;
+    background-color: #FFC0CB;
+    color: white;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+      }
+
+      /* Section des catégories */
+
+/* Colonne de produit */
+
+
+/* Section des catégories */
+
+
+.col-4 {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 calc(25% - 20px);
+  min-width: 250px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  height: 100%;
+}
+
+.product-img-wrapper {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease; 
+}
+.product-img-wrapper img:hover {
+  transform: scale(1.05); /* Agrandit l'image de 5% */
+}
+
+/* Masquer l'icône initialement */
+.product-img-wrapper i {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: #28a745;
+  z-index: 10;
+  opacity: 0; /* Initialement invisible */
+  transition: opacity 0.3s ease; /* Effet de transition pour une apparition douce */
+}
+
+/* Afficher l'icône lorsque l'on survole l'image */
+.product-img-wrapper:hover i {
+  opacity: 1; /* L'icône devient visible au survol */
+}
+
+/* Facultatif : Ajuster l'icône au survol */
+.product-img-wrapper i:hover {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.product-info {
+  margin-top: auto;
+  text-align: center;
+}
+
+.col-4 h4,
+.col-4 p {
+  min-height: 40px;
+  margin: 10px 0;
+}
+
+.prix {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.add-to-cart {
+  background-color: #F6A9B7;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.add-to-cart:hover {
+  background-color: #F28D94;
+}
+
+.col-2 {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 calc(50% - 20px);
+  min-width: 300px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  height: 100%;
+}
+
+
+
+    .categories h2{
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: blue;
+    }
+    
+    .col-3:hover{
+        transform: translate(-5px);
+    }
+    
+    .col-3 a {
+        font-size: 20px;
+        display: inline-block;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin-top: 10px;
+        background-color: #FFC0CB;
+        color: white;
+        border-radius: 30px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    
+    /* Effet au survol */
+    .col-3 a:hover {
+        background-color: #ff94b8;
+        transform: scale(1.05);
+    }
+
+    .prix {
+        font-size: 25px;
+        font-weight: bold;
+        color: #e91e63; /* rose vif pour attirer l’œil */
+        margin: 10px 0;
+        text-align: center;
+        background-color: #ffe4ec;
+        display: inline-block;
+        padding: 8px 15px;
+        border-radius: 20px;
+    }
+    .etoile {
+        margin-top: 3px;
+        text-align: center;
+        color: #FFC0CB; /* jaune doré pour les étoiles */
+        font-size: 18px;
+    }
+    
+    .etoile i {
+        margin: 0 2px;
+        transition: transform 0.2s ease;
+    }
+    
+    .etoile i:hover {
+        transform: scale(1.2);
+        color: #FFC0CB; /* rose clair au survol pour effet sympa */
+    }
+        
+
+    #panier-content {
+        position: absolute;
+        top: 40px;
+        right: 10px;
+        width: 200px;
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 10px;
+        display: none;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      /* Style général pour le contenu du panier */
+#panier-content {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  /* Style pour le bouton Commander */
+  .commander-btn {
+    display: inline-block;
+    background-color: #007bff; /* Bleu vif */
+    color: white;
+    padding: 15px 30px; /* Taille du bouton */
+    border-radius: 50px; /* Bordures arrondies */
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%; /* Le bouton prend toute la largeur du conteneur */
+    box-sizing: border-box;
+    transition: background-color 0.3s, transform 0.2s; /* Effet de transition */
+    margin-top: 20px; /* Espacement avec les autres éléments */
+  }
+  
+  /* Effet au survol */
+  .commander-btn:hover {
+    background-color: #0056b3; /* Bleu plus foncé au survol */
+    transform: scale(1.05); /* Légère augmentation de la taille du bouton */
+  }
+  
+  /* Effet lors du clic */
+  .commander-btn:active {
+    background-color: #004085; /* Bleu encore plus foncé lors du clic */
+    transform: scale(1); /* Retour à la taille normale lors du clic */
+  }
+  
+  /* Style pour les éléments du panier (optionnel) */
+  #cart-items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #cart-items li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #cart-total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+
+/* Superposition sombre lors de l'ouverture du menu */
+body.show-mobile-menu {
+  overflow: hidden; /* Empêche le défilement de la page derrière le menu */
+}
+
+body.show-mobile-menu header::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.5); /* Superposition sombre */
+  z-index: 10; /* Assure que la superposition soit au-dessus du contenu */
+}
+
+body.show-mobile-menu .Accueil, 
+body.show-mobile-menu .footer, 
+body.show-mobile-menu .menu {
+  visibility: hidden; /* Cache tout le contenu sauf le menu */
+}
+
+.navbar .nav-menu {
+  z-index: 20; /* Le menu doit être au-dessus de la superposition */
+}
+
+
+.site-footer {
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.feature {
+  flex: 1;
+  min-width: 200px;
+}
+
+.feature i {
+  font-size: 30px;
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+.feature .text {
+  font-size: 14px;
+  color: #444;
+}
+
+.feature strong {
+  font-weight: bold;
+  font-size: 15px;
+  color: #000;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-col h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.footer-col p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.produits-lateraux {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex: 1;
+  padding-top: 10px;
+}
+
+.produit {
+  width: 160px;
+  height: 230px;
+  background: #f3f3f3;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.produit img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover; /* force à remplir le cadre sans déformer */
+  border-radius: 6px;
+}
+
+
+.categories {
+  margin: 0;
+  padding: 5px;
+  margin-bottom: 50px;
+}
+
+.categories h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.col-3 {
+  position: relative;
+  flex-basis: 45%; /* Deux produits par ligne en mobile */
+  max-width: 48%;
+  min-width: 140px;
+  margin: auto;
+  transition: transform 0.3s ease;
+}
+
+.col-3 img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 300px;
+  border-radius: 8px;
+}
+
+.col-3 .texte {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: blue;
+  background-color: transparent;
+  padding: 6px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+  z-index: 1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Adaptation mobile (1 produit par ligne en très petit écran) */
+@media (max-width: 480px) {
+  .col-3 {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  .col-3 .texte {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+}
+
+
+.products-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* ou space-between */
+}
+
+.product-card {
+  width: 220px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.product-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.product-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-img-wrapper i {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: white;
+  background: black;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.product-info {
+  padding: 10px;
+}
+
+.prix {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.add-to-cart {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+
+

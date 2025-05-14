@@ -1,0 +1,119 @@
+.section-produits {
+    padding: 20px;
+    margin-bottom: 50px;
+  }
+  
+  .section-produits h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .grille-produits {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes par défaut */
+  }
+  
+  .carte-produit {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.5s;
+  }
+  
+  .carte-produit img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 250px;
+    display: block;
+    border-radius: 10px;
+  }
+  
+  .texte-produit {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: blue;
+    text-align: center;
+    z-index: 2;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .grille-produits {
+      grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur mobile */
+    }
+  
+    .texte-produit {
+      font-size: 20px;
+      padding: 4px 8px;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    /* Masquer l'original .me */
+    .slider {
+      display: none !important;
+    }
+  }
+
+  .grid-produits {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .carte-produit {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .carte-produit img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .carte-produit:hover {
+    transform: scale(1.05);
+  }
+  
+  .prix {
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px;
+  }
+  
+  .add-to-cart {
+    display: inline-block;
+    margin-top: 8px;
+    color: white;
+    background-color: #ff69b4;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .add-to-cart:hover {
+    background-color: #ff1493;
+  }
+  
+  /* Responsive pour les téléphones (2 colonnes) */
+  @media (max-width: 768px) {
+    .grid-produits {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  
